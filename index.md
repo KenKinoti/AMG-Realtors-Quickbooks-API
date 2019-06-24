@@ -1,37 +1,143 @@
-## Welcome to GitHub Pages
+# AMG Realtors 
 
-You can use the [editor on GitHub](https://github.com/KenKinoti/amg-realtors/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+## API Documentation
+A documenation for the API's avalable for AMG Relators Quickbooks API Integration
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### Allowed HTTP Requests
+- POST    : Update resource
+- GET     : Get a resource or list of resources
 
-### Markdown
+### Description Of Usual Server Responses:
+- 200 OK - the request was successful (some API calls may return 201 instead).
+- 201 Created - the request was successful and a resource was created.
+- 204 No Content - the request was successful but there is no representation to return (i.e. the response is empty).
+- 400 Bad Request - the request could not be understood or was missing required parameters.
+- 401 Unauthorized - authentication failed or user doesn't have permissions for requested operation.
+- 403 Forbidden - access denied.
+- 404 Not Found - resource was not found.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
 
-```markdown
-Syntax highlighted code block
+## Endpoint Samples
 
-# Header 1
-## Header 2
-### Header 3
+### GET : Ping
+Request 
 
-- Bulleted
-- List
+>GET : https://quickbooks-api-239414.appspot.com/
 
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+Success Response
+```
+{
+      "message": "Welcome to AMG Realtors API"
+}
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+Error Response
+```
+{
+      "message": "Error with ping endpoint"
+}
+```
 
-### Jekyll Themes
+### GET : Customers
+Request
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/KenKinoti/amg-realtors/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+> GET : https://quickbooks-api-239414.appspot.com/customers
 
-### Support or Contact
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+Success Response
+```
+{  
+   "QueryResponse":{  
+      "Customer":[  
+         {  
+            "Balance":239,
+            "sparse":true,
+            "Id":"1",
+            "GivenName":"Amy",
+            "FamilyName":"Lauterbach"
+         }
+      ],
+      "startPosition":1,
+      "maxResults":29
+   },
+   "time":"2019-05-09T06:05:28.747-07:00"
+}
+```
+
+Error Response
+```
+{
+      "message": "Error with customer API"
+}
+```
+### POST : Payment-Update
+
+Request
+
+> POST : COMING SOON
+
+
+Headers
+```
+User-Agent	{{UserAgent}}
+Accept	application/json
+Content-Type	application/json
+```
+
+Params
+```
+minorversion	{{minorversion}}
+```
+
+Body
+```
+{
+    "CustomerRef": {
+      "value": "58",
+      "name": "TEST123"
+    },
+    "DepositToAccountRef": {
+      "value": "4"
+    },
+    "TotalAmt": 100,
+    "UnappliedAmt": 0,
+    "ProcessPayment": false,
+    "domain": "QBO",
+    "sparse": false,
+    "Id": "174",
+    "SyncToken": "0",
+    "TxnDate": "2016-08-29",
+    "CurrencyRef": {
+      "value": "USD",
+      "name": "United States Dollar"
+    },
+    "ExchangeRate": 1,
+    "Line": [
+      {
+        "Amount": 100,
+        "LinkedTxn": [
+          {
+            "TxnId": "173",
+            "TxnType": "Invoice"
+          }
+        ],
+        "LineEx": {
+          "any": [
+            {
+              "name": "{http://schema.intuit.com/finance/v3}NameValue",
+              "declaredType": "com.intuit.schema.finance.v3.NameValue",
+              "scope": "javax.xml.bind.JAXBElement$GlobalScope",
+              "value": {
+                "Name": "txnReferenceNumber",
+                "Value": "1043"
+              },
+              "nil": false,
+              "globalScope": true,
+              "typeSubstituted": false
+            }
+          ]
+        }
+      }
+    ]
+  }
+  ```
