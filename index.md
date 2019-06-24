@@ -1,6 +1,6 @@
 # AMG Realtors 
 
-## API Documentation
+## Quickbooks API Documentation
 A documenation for the API's avalable for AMG Relators Quickbooks API Integration
 
 ### Allowed HTTP Requests
